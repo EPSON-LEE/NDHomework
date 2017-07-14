@@ -1,0 +1,15 @@
+section i{
+  width: 150px;
+  height: 164px;
+  background-image: url(img/resource.png);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -82px;
+}
+ footer{
+   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 700px;
+ }
