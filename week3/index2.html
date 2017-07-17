@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+</body>
+<script> 
+  var oriObj = [{
+      "id": 1,
+      "name": "郑和下西洋",
+      "datetime": 1499410888346
+    },
+    {
+      "id": 2,
+      "name": "郑和上西洋",
+      "datetime": 1489410888346
+    },
+    {
+      "id": 3,
+      "name": "郑和上西洋",
+      "datetime": 1489410888346
+    },
+    {
+      "id": 4,
+      "name": "郑和上西洋",
+      "datetime": 1489410888346
+    }
+  ]
+
+  function transArrToObj(oriObj) {
+    var tarObj = {},
+      entities = {},
+      result = [];
+    for (var index in oriObj) {
+      if (typeof(oriObj[index]) == 'object') {
+        entities[index] = oriObj[index].id;
+        result.push(oriObj[index].id);
+      }
+    }
+    tarObj.result = result;
+    tarObj.entities = entities;
+    return tarObj;
+  }
+  console.log(transArrToObj(oriObj));
+
+ function mySort(){
+
+ }
+
+ function myFilter(){
+
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>
