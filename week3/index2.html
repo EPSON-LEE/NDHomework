@@ -8,7 +8,7 @@
 </head>
 <body>
 </body>
-<script> 
+<script>
   var oriObj = [{
       "id": 1,
       "name": "郑和下西洋",
@@ -29,10 +29,10 @@
       "name": "郑和上西洋",
       "datetime": 1489410888346
     }
-  ]
+  ];
 
   function transArrToObj(oriObj) {
-    var tarObj = {},
+    let tarObj = {},
       entities = {},
       result = [];
     for (var index in oriObj) {
@@ -45,21 +45,56 @@
     tarObj.entities = entities;
     return tarObj;
   }
-  console.log(transArrToObj(oriObj));
+  // console.log(transArrToObj(oriObj));
 
- function mySort(){
 
+  function sortBy(field1,field2) {
+    return function(a,b) {
+        if(a.field1 == b.field1) return a.field2 - b.field2;
+        return a.field1 - b.field1;
+    }
+  }
+ function mySort(arr,columnName,fn){
+  arr.sort(sortBy(columnName));
  }
 
- function myFilter(){
 
- }
+ var oriObj = [{
+     "id": 1,
+     "name": "郑和下西洋",
+     "datetime": 1499410888346
+   },
+   {
+     "id": 2,
+     "name": "郑和上西洋",
+     "datetime": 1489410888346
+   },
+   {
+     "id": 3,
+     "name": "郑和上西洋",
+     "datetime": 1489410888346
+   },
+   {
+     "id": 4,
+     "name": "郑和上西洋",
+     "datetime": 1489410888346
+   }
+ ];
 
 
-
-
-
-
+// // 根据任意字段值的过滤函数
+function myFilter(arr, columnName,fn){
+   for(let i in arr){
+       for(let j in arr[i]){
+         if( j == columnName){
+           delete arr[i][j];
+         }
+       }
+   }
+   return arr;
+}
+// 示例
+console.log(myFilter(oriObj, 'id'));
 
 
 
