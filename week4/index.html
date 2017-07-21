@@ -7,168 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-      #shader {
-      width:100%;
-      height:100%;
-      background-color:#000;
-      position:absolute;
-      top:0;
-      left:0;
-      z-index:2;
-      opacity:0.3;
-      /*兼容IE8及以下版本浏览器*/
-      filter: alpha(opacity=30);
-      display:none;
-    }
-    .new{
-      border-radius:20px;
-      background-color: #17a7fa;
-      position: absolute;
-      left: 50%;
-      margin-left: -378px;
-      margin-top: 230px;
-      z-index: 1;
-
-    }
-      .new header{
-        width: 100%;
-        height: 45px;
-        line-height: 45px;
-        text-align: center;
-        color: #ffffff;
-        font-size: 18px;
-      }
-        .new header i{
-          width: 20px;
-          height: 20px;
-          float: right;
-          background-image: url(img/close1.png);
-          text-align: center;
-          vertical-align: middle;
-          line-height: 20px;
-          position: relative;
-          left: ;
-          right: 15px;
-          top: 15px;
-        }
-      .new section{
-        width: 630px;
-        background-color: #ffffff;
-        padding: 32;
-        padding: 2px 86px 32px 40px;
-        font:16px;
-        color:#4d5b67;
-      }
-        .new section div{
-          margin-top: 28px;
-        }
-        .new section input{
-          width: 270px;
-          height: 36px;
-          padding-left: 10px;
-          color: #4d5b67;
-          font-family: "微软雅黑 Regualar";
-        }
-        .new section span{
-          color: #4d5b67;
-          font-size: 16px;
-          padding-right: 14px;
-        }
-        .new section .new-content-author span,
-        .new section .new-content-info span{
-          vertical-align: top;
-          font-family: "微软雅黑 Regualar" ;
-        }
-        .new section .new-content-author,
-        .new-content-picture,
-        .new section .new-content-info{
-          padding-left: 30px;
-        }
-        .new section .new-content-author{
-          height: 80px;
-        }
-        .new section .new-content-author .author-box{
-          width: 400px;
-          height: 56px;
-          padding:14px 10px;
-          resize:none;
-          font-family: "微软雅黑 Regualar" ;
-          border: 1px solid #d0d0d0;
-          position: relative;
-          top: -50px;
-          right: -50px;
-        }
-        /*name-icon*/
-        .new section .new-content-author .author-box span{
-          display: inline-block;
-          font-size: 14px;
-          padding-right: 15px;
-          margin-bottom: 15px;
-        }
-        .new section .new-content-author .author-box span a{
-          float: left;
-          margin-right: 5px;
-        }
-        .new section .new-content-author .author-box span i{
-          background-image: url(img/close-usr.png);
-          background-repeat: no-repeat;
-          width: 18px;
-          height: 18px;
-          float: right;
-          cursor: pointer;
-        }
-        /*add icon*/
-        .new section .new-content-author .author-box .add-usr{
-          width: 30px;
-          height: 30px;
-          display: inline-block;
-          position: absolute;
-          right: -50px;
-          top: 55px;
-          background-image: url(img/add.png);
-        }
-        .new section .new-content-info textarea{
-          padding:20px 10px 0 10px;
-          width: 500px;
-          height: 129px;
-          resize:none;
-          font-size: 14px;
-          color: #4d5b67;
-          line-height: 24px;
-          font-family: "微软雅黑 Regualar" ;
-        }
-        .new .footer{
-          height: 100px;
-          padding-top: 10px;
-          background: #f0f5f9;
-          border-bottom-left-radius: 20px;
-          border-bottom-right-radius: 20px;
-        }
-        .new .footer button{
-          border: 1px solid #1293f9;
-          width: 122px;
-          height: 34px;
-          color: #ffffff;
-          font-size: 16px;
-          background: -webkit-linear-gradient(#1bb8fb,#1293f9);
-          background: -o-linear-gradient(#1bb8fb,#1293f9);
-          background: -moz-linear-gradient(#1bb8fb,#1293f9);
-          background: -mos-linear-gradient(#1bb8fb,#1293f9);
-          background: linear-gradient(#1bb8fb,#1293f9);
-          margin: 0 auto;
-          display: block;
-          margin-top: 10px;
-        }
-        .new .footer .footer-tips{
-          display: block;
-          text-align: center;
-          margin-top: 5px;
-          color: #b2b2b2;
-        }
-  </style>
 </head>
-
 <body>
 <!--[if lte IE 8]>
 <p class="browserupgrade">您的浏览器版本过老, 请到 <a href="http://browsehappy.com/">这里</a> 更新, 以获取最佳的体验</p>
@@ -176,10 +15,10 @@
 <!-- shader -->
 <div id="shader"></div>
 <!-- 新建提示框 -->
-<div class="new">
+<div id="memberWindow" class="new" style="display:none;">
   <header>
     <span>新建作品</span>
-    <i></i>
+    <i id="memberWindowCloseButton"></i>
   </header>
   <section>
     <div class="new-content-source">
@@ -188,17 +27,10 @@
     </div>
     <div class="new-content-author">
       <span>作者</span>
-      <div class="author-box">
-        <span><a href="">李明</a><i></i></span>
-        <span><a href="">张三丰</a><i></i></span>
-        <span><a href="">吴老二</a><i></i></span>
-        <span><a href="">李四</a><i></i></span>
-        <span><a href="">周杰伦 </a><i></i></span>
-        <span><a href="">斯琴</a><i></i></span>
-        <span><a href="">王小二</a><i></i></span>
-        <i class="add-usr"></i>
+      <div id="authorBox" class="author-box">
+        <span style="display:none;"><a href="javascript:"></a><i class="del"></i></span>
       </div>
-
+      <i id="addUser"class="add-usr"></i>
     </div>
     <div class="new-content-picture">
       <span>配图</span>
@@ -214,9 +46,43 @@
     <button>确认提交</button>
     <span class="footer-tips">提交后显示在班级作品区</span>
   </div>
+
 </div>
-  <!--  -->
-  <div class="outer clearfix">
+<!-- 班级成员弹窗 -->
+<div id="nameList" class="member" style="display:none;">
+  <header>
+    <span>班级成员</span>
+  </header>
+  <section class="content">
+    <div class="name-list">
+      <input type="text" placeholder="搜索人名...">
+      <div id="nameListLeft"class="name-list-left">
+        <span style="display:none;"></span>
+      </div>
+    </div>
+    <div class="button-list">
+      <button id="addName2List" class="add-button">添加</button>
+      <button id="delName2List" class="del-button">删除</button>
+    </div>
+    <div id="nameListRight"class="name-list name-list-right">
+      <span style="display:none;"></span>
+    </div>
+  </section>
+  <div class="footer">
+    <button id="confirm">确定</button>
+  </div>
+
+</div>
+<!-- 提交成功 -->
+<div class="success" style="display:none;">
+  <span>提交成功 !</span>
+</div>
+<!-- 提交失败 -->
+<div class="error" style="display:none;">
+  <span>网络错误，请重试 ！</span>
+</div>
+<!-- 显示页面 -->
+<div class="outer clearfix">
     <div class="left">
       <div class="left-header">
         <div class="left-header-content">
@@ -233,29 +99,29 @@
         <ul>
           <li>
             <s class="s-icon"></s>
-            <a href="#">全部课程</a>
+            <a href="javascript:">全部课程</a>
           </li>
           <li class="selected">
             <s class="s-icon"></s>
-            <a href="#">课程一：静夜思</a>
+            <a href="javascript:">课程一：静夜思</a>
+          </li>
+          <li
+          >
+            <s class="s-icon"></s>
+            <a href="javascript:">课程二：红军长征</a>
           </li>
           <li>
             <s class="s-icon"></s>
-            <a href="#">课程二：红军长征</a>
+            <a href="javascript:">课程三：活字印刷术</a>
           </li>
           <li>
             <s class="s-icon"></s>
-            <a href="#">课程三：活字印刷术</a>
+            <a href="javascript:">课程四：郑和下西洋</a>
           </li>
           <li>
             <s class="s-icon"></s>
-            <a href="#">课程四：郑和下西洋</a>
+            <a href="javascript:">课程五：梦想之家</a>
           </li>
-          <li>
-            <s class="s-icon"></s>
-            <a href="#">课程五：梦想之家</a>
-          </li>
-
         </ul>
       </div>
     </div>
@@ -264,11 +130,11 @@
         <ul class="personal-message">
           <li class="personal-message-first">
             <s class="user-ico"></s>
-            <a href="">用户：王小明</a>
+            <a href="javascript:">用户：王小明</a>
           </li>
           <li class="personal-id-first">
             <s class="id-ico"></s>
-            <a href="">身份：学生</a>
+            <a href="javascript:">身份：学生</a>
           </li>
           <li class="select-box">
             <select class="" name="选择设备">
@@ -279,18 +145,18 @@
         </ul>
         <ul class="course-list">
           <li class="my-project">
-            <a href="">我的作品</a>
+            <a href="javascript:">我的作品</a>
           </li>
           <li class="class-project">
-            <a href="">班级作品</a>
+            <a href="javascript:">班级作品</a>
           </li>
-          <li id="new-project" class="new-project">
+          <li id="createProject" class="new-project">
             <s class="new-ico"></s>
-            <a href="">新建作品</a>
+            <a href="javascript:">新建作品</a>
           </li>
           <li class="submit-project">
             <s class="submit-ico"></s>
-            <a href="">提交作品</a>
+            <a href="javascript:">提交作品</a>
           </li>
         </ul>
       </div>
@@ -418,9 +284,7 @@
 
 
       <!-- resource is null -->
-      <!-- <section class="null-resource">
-
-        </section> -->
+      <!-- <section class="null-resource"></section> -->
       <footer>
         <div class="footer-cat" style="cursor:auto;">
           <span><</span>
@@ -453,14 +317,5 @@
     </div>
   </div>
 </body>
-<script>
-window.onload = function(){
-  var newProject = document.getElementById("new-project"),
-      shader = document.getElementById("shader");
-      newProject.onclick = function(){
-        shader.style.display = "block";
-      }
-}
-
-</script>
+<script type="text/javascript" src="index.js"></script>
 </html>
