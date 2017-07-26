@@ -220,24 +220,7 @@ function delEventer(){
 * 数据模型的构建
 */
 // 数据
-var data = [
-  {
-    "title":"",
-    "author":"lee",
-    "name": "郑和下西洋1",
-    "datetime": 1499410888346,
-    "image": "",
-    "description":"dfsda"
-  },
-  {
-    "title":"",
-    "author":"dee",
-    "name": "郑和下西洋1",
-    "datetime": 1499410888346,
-    "image": "",
-    "description":"dfsda"
-  },
-];
+var data = [];
 
 class courseList{
   constructor(){
@@ -246,25 +229,53 @@ class courseList{
     // 声明一个变量用于保存当前被选择的页面号码（初始页面为1）
     this.selPageIndex = null;
   }
+
+  _changeToMyProjectTap(){
+    $("#myProject").attr('class','my-project project-selected');
+    $("#classProject").attr('class','my-project');
+    $(".right-content").show();
+    $(".class-project").hide();
+  }
+  _changeToClassProjectTap(){
+    $("#myProject").attr('class','my-project');
+    $("#classProject").attr('class','my-project project-selected');
+    $(".right-content").hide();
+    $(".class-project").show();
+
+    if($(".class-project .item").length <= 1){
+      $(".class-project").attr("class","null-resource");
+    }
+
+  }
   // 新建作品
   _createProject(){
+    // shader层隐藏
     $("#shader").css("display","none");
+    // 弹窗隐藏
     $("#memberWindow").css("display","none");
+    // 临时对象
       var newObj  = {};
+    // 存储对象元素
       newObj.title = $("#sourceGet").val();
+    // 存储作者
       newObj.authorList = [];
       for(var i = 1; i < $("#authorBox span a").length; i++){
         newObj.authorList.push($("#authorBox span a")[i].innerHTML);
       }
+      var list = newObj.authorList.join("、");
+    // 存储时间戳
       newObj.dateTime = Date.parse(new Date());
+    // 存入data中
       data.push(newObj);
 
       $(".item:first").find(".shader").attr("data-msg",newObj.authorList.toString());
-      $(".item:first").find(".name-des").html(newObj.authorList.toString());
+      $(".item:first").find(".name-des").html(list);
       $(".item:first").find(".date").html(new Date(parseInt(newObj.dateTime)).toLocaleString().replace(/:\d{1,2}$/,' '));
+      $(".item:first").find(".tap-des").html(newObj.title);
       var newNode = $(".item")[0].cloneNode(true);
       newNode.style.display = "inline-block";
-      $(".right-content").append(newNode);
+      $(".null-resource").attr("class","class-project")
+      $(".class-project").append(newNode);
   }
   _editProject(){}
   _delProject(){}
@@ -272,9 +283,10 @@ class courseList{
   initEventListener(){
     // 提交按钮点击事件
     $("#submitNewProject").bind("click",this._createProject);
-    // 模糊查询
-    $("#searchName").bind("onkeydown",this._queryName);
-    //firefox下检测状态改变只能用oninput,且需要用addEventListener来注册事件。
+    // 切换到班级作品
+    $("#classProject").bind("click",this._changeToClassProjectTap);
+    // 切换到我的作品
+    $("#myProject").bind("click",this._changeToMyProjectTap);
   }
 }
 
@@ -423,4 +435,9 @@ window.onload = function(){
     } else{//非ie浏览器，比如Firefox
         document.getElementById("searchName").addEventListener("input",handle,false);
     }
+
+    $("#nameList").bind("mousedown",function call(){
+      $("#addName2List").attr("class","add-button button-selected");
+    });
+
 }

@@ -316,14 +316,17 @@ a {
 
 .right .right-header .course-list .my-project {
   width: 110px;
-  border-bottom: 2px solid #16a4fa;
   line-height: 52px;
   text-align: center;
   vertical-align: middle;
   margin-left: 34px;
 }
 
-.right .right-header .course-list .my-project a {
+.project-selected{
+  border-bottom: 2px solid #16a4fa;
+}
+
+.right .right-header .course-list .project-selected a {
   color: #3a98d8;
 }
 
@@ -366,6 +369,7 @@ a {
 
 .right .right-header .course-list .new-project {
   margin-right: 54px;
+  cursor: pointer;
 }
 
 .right .right-header .course-list .new-project a, .right .right-header .course-list .submit-project a {
@@ -503,7 +507,6 @@ article {
   height: 34px;
   background-color: rgba(10, 1, 1, 0.5);
   margin-top: 180px;
-  text-align: center;
   vertical-align: middle;
   position: relative;
 }
@@ -535,7 +538,7 @@ article {
   text-overflow: ellipsis;
   white-space: nowrap;
   line-height: 15px;
-  margin-left: 20px;
+  margin-left: 50px;
   margin-top: 8px;
 }
 
@@ -790,6 +793,7 @@ z-index: 2;
   color: #ffffff;
   font-size: 18px;
   z-index: 2;
+  cursor: pointer;
 }
   .new header i{
     width: 20px;
@@ -939,6 +943,7 @@ z-index: 2;
     font-size: 18px;
     line-height: 46px;
     text-align: center;
+    cursor: pointer;
   }
   .member header i{
     width: 20px;
@@ -951,6 +956,7 @@ z-index: 2;
     position: relative;
     right: 15px;
     top: 15px;
+    cursor:pointer;
   }
   .member .content{
     width: 424px;
@@ -1025,15 +1031,18 @@ z-index: 2;
     font-size: 14px;
     margin-left: -5px;
     border-radius: 3px;
+    border: 1px solid #909db6;
+    background:linear-gradient(#b8c1d0,#909db6);
+    cursor: pointer;
   }
   .member .content .button-list .add-button{
-    background:linear-gradient(#1bb9fb,#1293f9);
     margin-bottom: 38px;
-    border: 1px solid #1293f9;
   }
   .member .content .button-list .del-button{
-    background:linear-gradient(#b8c1d0,#909db6);
-    border: 1px solid #909db6;
+  }
+  .button-selected{
+    background:linear-gradient(#1bb9fb,#1293f9) !important;
+    border: 1px solid #1293f9 !important;
   }
   .member .footer{
     height: 68px;

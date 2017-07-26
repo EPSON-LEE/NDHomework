@@ -24,7 +24,7 @@
   <section>
     <div class="new-content-source">
       <span>资源名称</span>
-      <input id="sourceGet" type="text" value="真实世界-泰会玩">
+      <input id="sourceGet" type="text" placeholder="请输入标题">
     </div>
     <div class="new-content-author">
       <span>作者</span>
@@ -146,12 +146,15 @@
           </li>
         </ul>
         <ul class="course-list">
-          <li class="my-project">
+          <li id="myProject" class="my-project project-selected">
             <a href="javascript:">我的作品</a>
           </li>
-          <li class="class-project">
+          <li id="classProject" class="my-project">
             <a href="javascript:">班级作品</a>
           </li>
+          <!-- <li class="class-project">
+            <a href="javascript:">班级作品</a>
+          </li> -->
           <li id="createProject" class="new-project">
             <s class="new-ico"></s>
             <a href="javascript:">新建作品</a>
@@ -197,17 +200,14 @@
             <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
             <span class="date">2016/08/04 10:55</span>
           </div>
-
           <div class="choose-tap">
             <span class="edit">编辑</span>
             <span class="play">播放</span>
             <span class="del">删除</span>
-            <!-- unique block to describe the box -->
             <span class="tap-des">郑和下西洋</span>
           </div>
-
         </div>
-        <!-- <div class="item item2">
+        <div class="item item2">
           <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
             <i class="shader-ico"></i>
             <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
@@ -297,9 +297,26 @@
             <span class="del">删除</span>
             <span class="tap-des">郑和下西洋</span>
           </div>
-        </div>  -->
+        </div>
       </article>
+      <article class="class-project" style="display:none">
+        <div class="item" style="display:none;">
+          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
+            <i class="shader-ico"></i>
+            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
+            <span class="date">2016/08/04 10:55</span>
+          </div>
 
+          <div class="choose-tap">
+            <span class="edit">编辑</span>
+            <span class="play">播放</span>
+            <span class="del">删除</span>
+            <!-- unique block to describe the box -->
+            <span class="tap-des">郑和下西洋</span>
+          </div>
+
+        </div>
+      </article>
 
       <!-- resource is null -->
       <!-- <section class="null-resource"></section> -->
