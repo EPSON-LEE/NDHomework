@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 <!--[if lte IE 8]>
@@ -23,7 +24,7 @@
   <section>
     <div class="new-content-source">
       <span>资源名称</span>
-      <input type="text" value="真实世界-泰会玩">
+      <input id="sourceGet" type="text" value="真实世界-泰会玩">
     </div>
     <div class="new-content-author">
       <span>作者</span>
@@ -32,9 +33,9 @@
       </div>
       <i id="addUser"class="add-usr"></i>
     </div>
-    <div class="new-content-picture">
+    <div id="upload"class="new-content-picture">
       <span>配图</span>
-      <input type="text" placeholder="点击上传图片">
+      <input type="file" placeholder="点击上传图片">
     </div>
     <div class="new-content-info">
       <span>简介</span>
@@ -43,7 +44,7 @@
     </div>
   </section>
   <div class="footer">
-    <button>确认提交</button>
+    <button id="submitNewProject">确认提交</button>
     <span class="footer-tips">提交后显示在班级作品区</span>
   </div>
 
@@ -52,10 +53,11 @@
 <div id="nameList" class="member" style="display:none;">
   <header>
     <span>班级成员</span>
+    <i class="member-close"></i>
   </header>
   <section class="content">
     <div class="name-list">
-      <input type="text" placeholder="搜索人名...">
+      <input id="searchName" type="text" placeholder="搜索人名...">
       <div id="nameListLeft"class="name-list-left">
         <span style="display:none;"></span>
       </div>
@@ -173,6 +175,22 @@
         </ul>
       </section>
       <article class="right-content">
+        <div class="item" style="display:none;">
+          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
+            <i class="shader-ico"></i>
+            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
+            <span class="date">2016/08/04 10:55</span>
+          </div>
+
+          <div class="choose-tap">
+            <span class="edit">编辑</span>
+            <span class="play">播放</span>
+            <span class="del">删除</span>
+            <!-- unique block to describe the box -->
+            <span class="tap-des">郑和下西洋</span>
+          </div>
+
+        </div>
         <div class="item">
           <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
             <i class="shader-ico"></i>
@@ -189,7 +207,7 @@
           </div>
 
         </div>
-        <div class="item item2">
+        <!-- <div class="item item2">
           <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
             <i class="shader-ico"></i>
             <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
@@ -279,7 +297,7 @@
             <span class="del">删除</span>
             <span class="tap-des">郑和下西洋</span>
           </div>
-        </div>
+        </div>  -->
       </article>
 
 
@@ -317,5 +335,15 @@
     </div>
   </div>
 </body>
+
+<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="js/upload.min.js"></script>
 <script type="text/javascript" src="index.js"></script>
+<script>
+  var draggie = new Draggabilly('.new',{containment:true});
+  var draggie2 = new Draggabilly('.member',{containment:true});
+
+</script>
+
 </html>

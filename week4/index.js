@@ -1,4 +1,8 @@
-/* 添加栏右侧设置选中 */
+/**
+ * ------------------------------------------------------------------
+ * 遍历Dom结构给父元素下的子元素绑定selected效果，即选中效果
+ * ------------------------------------------------------------------
+ */
 function setSelected(parentNode,className){
   [].forEach.call(parentNode,function(e,x){
         e.onclick = function(){
@@ -11,6 +15,11 @@ function setSelected(parentNode,className){
         };
     });
 }
+/**
+ * ------------------------------------------------------------------
+ * 遍历Dom结构给父元素下的子元素绑定del效果，即选中效果
+ * ------------------------------------------------------------------
+ */
 function delElement(){
   [].forEach.call(parentNode,function(e,x){
         e.onclick = function(){
@@ -21,6 +30,11 @@ function delElement(){
         };
     });
 }
+/**
+ * ------------------------------------------------------------------
+ * 将全局变量中的localStorage数据到左边列表中
+ * ------------------------------------------------------------------
+ */
 function read2List(){
   List = JSON.parse(localStorage.getItem('List'));
   var nameListNode = document.querySelector(".name-list-left");
@@ -33,10 +47,15 @@ function read2List(){
   var activeTargetLeft = document.querySelectorAll(".name-list-left span");
       setSelected(activeTargetLeft,"active");
 }
-
+/**
+ * ------------------------------------------------------------------
+ * 将全局变量中的localStorage数据到右边列表中
+ * ------------------------------------------------------------------
+ */
 function read2ListRight(){
   ListRight = JSON.parse(localStorage.getItem('ListRight'));
-  var nameListNode = document.getElementById("nameListRight")
+  var nameListNode = document.getElementById("nameListRight");
+  var authorBox = document.getElementById("authorBox");
   for(var i = 0; i < ListRight.length; i++){
     var CNode = nameListNode.firstElementChild.cloneNode(true);
     CNode.innerHTML = ListRight[i];
@@ -46,7 +65,11 @@ function read2ListRight(){
   var activeTargetRight = document.querySelectorAll(".name-list-right span");
       setSelected(activeTargetRight,"active-right");
 }
-/* 左侧数据写入浏览器 */
+/**
+ * ------------------------------------------------------------------
+ * 左侧列表中的数据写入localStorage
+ * ------------------------------------------------------------------
+ */
 function updateLeftNameList(){
   var arr =[];
   activeTargetLeft = document.querySelectorAll(".name-list-left span");
@@ -58,7 +81,11 @@ function updateLeftNameList(){
   List = arr;
   storage.setItem("List",JSON.stringify(List));
 }
-/* 右侧数据写入浏览器 */
+/**
+ * ------------------------------------------------------------------
+ * 右侧列表中的数据写入localStorage
+ * ------------------------------------------------------------------
+ */
 function updateRightNameList(){
   var arr =[];
   activeTargetRight = document.querySelectorAll(".name-list-right span");
@@ -72,34 +99,192 @@ function updateRightNameList(){
     storage.setItem("ListRight",JSON.stringify(ListRight));
   }
 }
-/* 更新新建作品栏目窗口 */
+/**
+ * ------------------------------------------------------------------
+ * ListRight中的姓名信息同步到authorBox中
+ * ------------------------------------------------------------------
+ */
 function updateAuthorBox(){
-  var authorColumn = document.getElementById("authorBox");
-  ListRight = JSON.parse(localStorage.getItem('ListRight'));
-  var authorBoxNum = document.querySelectorAll(".author-box span");
-  for(var j = 0; j < authorBoxNum.length; j++){
-    if(j != 0){
-        authorColumn.removeChild(authorBoxNum[j]);
+  var parent = document.getElementById("authorBox");
+  var authorBoxColumn = document.querySelectorAll("#authorBox span");
+  ListRight = JSON.parse(localStorage.getItem("ListRight"));
+
+  if(authorBoxColumn.length > 1){
+    for(var i = 0; i < authorBoxColumn.length; i++){
+      if(i == 0){
+        authorBoxColumn[0].style.display = "none";
+      }else{
+        parent.removeChild(authorBoxColumn[i]);
+      }
     }
   }
-  authorBoxNum[0].style.display = "none";
-  for(var i = 0; i<ListRight.length; i++){
-    if(i == 0){
-      authorColumn.firstElementChild.style.display= "inline-block";
-      authorColumn.firstElementChild.class = "del";
-    }else{
-      var newNode = authorColumn.firstElementChild.cloneNode(true);
-      newNode.style.display= "inline-block";
-      newNode.lastElementChild.class = "del";
-      authorColumn.appendChild(newNode);
-    }
-    authorColumn.firstElementChild.firstElementChild.innerHTML = ListRight[i];
+  for(var i = 0; i < ListRight.length; i++){
+    var newNode = authorBoxColumn[0].cloneNode(true);
+    newNode.style.display = "inline-block";
+    newNode.firstElementChild.innerHTML = ListRight[i];
+    parent.appendChild(newNode);
   }
-  setSelected(activeTargetLeft,"active");
-  setSelected(activeTargetRight,"active-right");
+}
+/**
+ * ------------------------------------------------------------------
+ * 将名单右侧列表信息清除
+ * ------------------------------------------------------------------
+ */
+function clearDataFromListRight(){
+  var parent = document.getElementById("nameListRight");
+  var authorBox = document.querySelectorAll("#nameListRight span");
+  if(authorBox.length >1){
+    for(var i = 0; i < authorBox.length; i++){
+        if(i != 0){
+          parent.removeChild(authorBox[i]);
+        }
+    }
+  }
+}
+/**
+ * ------------------------------------------------------------------
+ * 将localStorage中ListRight的信息更新到右侧列表
+ * ------------------------------------------------------------------
+ */
+function updateToListRightFromLocalStorage(){
+  var parent = document.getElementById("nameListRight");
+  var authorBox = document.querySelectorAll("#nameListRight span");
+
+  ListRight = JSON.parse(localStorage.getItem("ListRight"));
+  for(var i = 0; i < ListRight.length; i++){
+    var newNode = authorBox[0].cloneNode(true);
+    newNode.style.display = "block";
+    newNode.innerHTML = ListRight[i];
+    parent.appendChild(newNode);
+  }
+  var activeTargetRight = document.querySelectorAll(".name-list-right span");
+      setSelected(activeTargetRight,"active-right");
+}
+/**
+ * ------------------------------------------------------------------
+ * 将名单左侧列表信息清除
+ * ------------------------------------------------------------------
+ */
+function clearDataFromListLleft(){
+  var parent = document.getElementById("nameListLeft");
+  var authorBox = document.querySelectorAll("#nameListLeft span");
+  if(authorBox.length > 1){
+    for(var i = 0; i < authorBox.length; i++){
+        if(i != 0){
+          parent.removeChild(authorBox[i]);
+        }
+    }
+  }
+}
+/**
+ * ------------------------------------------------------------------
+ * 将localStorage中ListLeft的信息更新到左侧列表
+ * ------------------------------------------------------------------
+ */
+function updateToListLeftFromLocalStorage(){
+  var parent = document.getElementById("nameListLeft");
+  var authorBox = document.querySelectorAll("#nameListLeft span");
+  List = JSON.parse(localStorage.getItem("List"));
+  for(var i = 0; i < List.length; i++){
+      var newNode = authorBox[0].cloneNode(true);
+      newNode.style.display = "block";
+      newNode.innerHTML = List[i];
+      parent.appendChild(newNode);
+  }
+  var activeTargetLeft = document.querySelectorAll(".name-list-left span");
+      setSelected(activeTargetLeft,"active");
+}
+/**
+ * ------------------------------------------------------------------
+ * 橘黄色叉叉点击事件的绑定
+ * ------------------------------------------------------------------
+ */
+function delEventer(){
+  var author = document.querySelectorAll("#authorBox span");
+  var parent = document.getElementById("authorBox");
+  List = JSON.parse(localStorage.getItem('List'));
+  ListRight = JSON.parse(localStorage.getItem('ListRight'))
+  for(var i = 0; i < author.length; i++){
+    var num;
+    author[i].onclick = function(){
+      parent.removeChild(this);
+      List.push(this.firstElementChild.innerHTML);
+      storage.setItem("List",JSON.stringify(List));
+      num = ListRight.indexOf(this.firstElementChild.innerHTML);
+      ListRight.splice(num,1);
+      storage.setItem("ListRight",JSON.stringify(ListRight));
+    }
+  }
+}
+/**
+* 数据模型的构建
+*/
+// 数据
+var data = [
+  {
+    "title":"",
+    "author":"lee",
+    "name": "郑和下西洋1",
+    "datetime": 1499410888346,
+    "image": "",
+    "description":"dfsda"
+  },
+  {
+    "title":"",
+    "author":"dee",
+    "name": "郑和下西洋1",
+    "datetime": 1499410888346,
+    "image": "",
+    "description":"dfsda"
+  },
+];
+
+class courseList{
+  constructor(){
+    // 声明一个变量用于保存被选中的作品栏
+    this.selWorkBar = null;
+    // 声明一个变量用于保存当前被选择的页面号码（初始页面为1）
+    this.selPageIndex = null;
+  }
+  // 新建作品
+  _createProject(){
+    $("#shader").css("display","none");
+    $("#memberWindow").css("display","none");
+      var newObj  = {};
+      newObj.title = $("#sourceGet").val();
+      newObj.authorList = [];
+      for(var i = 1; i < $("#authorBox span a").length; i++){
+        newObj.authorList.push($("#authorBox span a")[i].innerHTML);
+      }
+      newObj.dateTime = Date.parse(new Date());
+      data.push(newObj);
+
+      $(".item:first").find(".shader").attr("data-msg",newObj.authorList.toString());
+      $(".item:first").find(".name-des").html(newObj.authorList.toString());
+      $(".item:first").find(".date").html(new Date(parseInt(newObj.dateTime)).toLocaleString().replace(/:\d{1,2}$/,' '));
+      var newNode = $(".item")[0].cloneNode(true);
+      newNode.style.display = "inline-block";
+      $(".right-content").append(newNode);
+  }
+  _editProject(){}
+  _delProject(){}
+
+  initEventListener(){
+    // 提交按钮点击事件
+    $("#submitNewProject").bind("click",this._createProject);
+    // 模糊查询
+    $("#searchName").bind("onkeydown",this._queryName);
+    //firefox下检测状态改变只能用oninput,且需要用addEventListener来注册事件。
+  }
 }
 
+
+
 window.onload = function(){
+
+    var a = new courseList;
+    a.initEventListener();
+
   var createProject = document.getElementById("createProject"); //添加按钮
       shader = document.getElementById("shader");//遮罩层
       memberWindow = document.getElementById("memberWindow");//新建作品
@@ -113,8 +298,9 @@ window.onload = function(){
       nameListRight = document.getElementById("nameListRight");//左侧名单
       nameList = document.getElementById("nameList");
       confirm = document.getElementById("confirm"); // 名单确认
+      searchName = document.getElementById("searchName");//搜索框
+      nameListCloseButton = document.querySelector("#nameList header i");
       storage = window.localStorage;
-
   /* 判断浏览器访问次数 用户第一次进入进入初始化名单列表*/
   if(localStorage.pagecount){
     localStorage.pagecount=Number(localStorage.pagecount) +1;
@@ -127,20 +313,19 @@ window.onload = function(){
     storage.setItem("List",JSON.stringify(List));
     storage.setItem("ListRight",JSON.stringify(ListRight));
   }
-  /* 将数据读入到Dom中 */
+  /* 将localStorage数据读入到Dom中 */
   read2List();
   read2ListRight();
   /* 更新Dom节点 */
   setSelected(activeTargetLeft,"active");
   setSelected(activeTargetRight,"active-right");
-
   // 事件绑定
   /* 新建作品 */
   createProject.addEventListener("click",function(){
     shader.style.display = "block";
     memberWindow.style.display = "block";
     updateAuthorBox();
-    // updateAuthorBox();
+    delEventer();
   })
   /* 新建作品窗口关闭 */
   memberWindowCloseButton.addEventListener("click",function(){
@@ -150,7 +335,13 @@ window.onload = function(){
   /* 新建窗口增加按钮事件响应 */
   addUser.addEventListener("click",function(){
     nameList.style.display = "block";
-    shader.style.zIndex = 3 ;
+    shader.style.zIndex = 3;
+    clearDataFromListRight();
+    updateToListRightFromLocalStorage();
+    clearDataFromListLleft();
+    updateToListLeftFromLocalStorage();
+    setSelected(activeTargetLeft,"active");
+    setSelected(activeTargetRight,"active-right");
   })
   /* 姓名列表增加 */
   addName2List.addEventListener("click",function(){
@@ -167,7 +358,6 @@ window.onload = function(){
       alert("请选中要添加的姓名");
     }
   })
-
   /* 姓名列表删除*/
   delName2List.addEventListener("click",function(){
     if(document.getElementById("active-right")){
@@ -190,8 +380,47 @@ window.onload = function(){
     setSelected(activeTargetLeft,"active");
     setSelected(activeTargetRight,"active-right");
     updateAuthorBox();
+    delEventer();
     nameList.style.display = "none";
     shader.style.zIndex = 2;
-    // 更新 新建窗口节点
   })
+  /* header 关闭按钮 */
+  nameListCloseButton.addEventListener("click",function(){
+    nameList.style.display = "none";
+    shader.style.zIndex = 2;
+  })
+  /* 课程列表 */
+  var oLi = document.querySelectorAll(".course ul li");
+  [].forEach.call(oLi,function(e,x){
+        e.onclick = function(){
+            for (let i = 0;i < oLi.length;i++){
+                oLi[i].className = '';
+                oLi[i].id = '';
+            }
+        this.className = "selected";
+        };
+    });
+
+    function handle(){
+        var List = JSON.parse(localStorage.getItem("List"));
+        var word = document.getElementById("searchName").value;
+        var value = "";
+        for(var i = 1;i < List.length;i++){
+            if(word!="" && List[i].match(word+".*") != null){
+              // 有问题
+                value += "<span>" + List[i] + "</span>";
+            }
+
+        }
+        document.getElementById('nameListLeft').innerHTML=value;
+    }
+    function add(city){
+        document.getElementById("searchName").value=city;
+    }
+    //firefox下检测状态改变只能用oninput,且需要用addEventListener来注册事件。
+    if(/msie/i.test(navigator.userAgent))    //ie浏览器
+        {document.getElementById("searchName").onpropertychange=handle
+    } else{//非ie浏览器，比如Firefox
+        document.getElementById("searchName").addEventListener("input",handle,false);
+    }
 }
