@@ -451,7 +451,7 @@ a {
   background-position-y: -30px;
 }
 
-article {
+.right-content {
   width: 1564px;
   height: 645px;
   background-color: #edf2f6;
@@ -721,7 +721,10 @@ footer .footer-cat {
   line-height: 40px;
   text-align: center;
   color: #4d5b67;
-  cursor: pointer;
+  -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 footer .footer-cat span {
@@ -752,13 +755,8 @@ footer .a {
 .null-resource {
   background-image: url(img/resource.png);
   background-repeat: no-repeat;
-  position: absolute;
-  width: 150px;
-  height: 164px;
-  left: 50%;
-  top: 50%;
-  margin-top: -82px;
-  margin-left: -75px;
+  background-position-x: 50%;
+  background-position-y: 50%;
 }
 /* 弹窗 */
 #shader {
@@ -886,6 +884,7 @@ z-index: 2;
     right: 80px;
     background-image: url(img/add.png);
     top: 55px;
+    cursor:pointer;
   }
   .new section .new-content-info textarea{
     padding:20px 10px 0 10px;
@@ -918,6 +917,7 @@ z-index: 2;
     margin: 0 auto;
     display: block;
     margin-top: 10px;
+    cursor: later;
   }
   .new .footer .footer-tips{
     display: block;
@@ -1001,7 +1001,7 @@ z-index: 2;
   .member .content .name-list-left span.active{
     background-color: #c3e5fa;
   }
-  .member .content .name-list-right span.active-right{
+  .member .content .name-list-right span.active{
     background-color: #c3e5fa;
   }
   .member .content  .name-list-right{

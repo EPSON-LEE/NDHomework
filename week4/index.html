@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 <!--[if lte IE 8]>
@@ -29,13 +27,14 @@
     <div class="new-content-author">
       <span>作者</span>
       <div id="authorBox" class="author-box">
-        <span style="display:none;"><a href="javascript:"></a><i class="del"></i></span>
+        <span id="authorBoxModel" style="display:none;"><a href="javascript:">test</a><i class="del"></i></span>
       </div>
       <i id="addUser"class="add-usr"></i>
     </div>
-    <div id="upload"class="new-content-picture">
+    <div id="upload" class="new-content-picture">
       <span>配图</span>
-      <input type="file" placeholder="点击上传图片">
+      <input id="files" type="file" placeholder="点击上传图片" onchange="previewImage(this, 'prvid')" multiple="multiple">
+      <div id="prvid">预览</div>
     </div>
     <div class="new-content-info">
       <span>简介</span>
@@ -47,33 +46,34 @@
     <button id="submitNewProject">确认提交</button>
     <span class="footer-tips">提交后显示在班级作品区</span>
   </div>
-
 </div>
 <!-- 班级成员弹窗 -->
 <div id="nameList" class="member" style="display:none;">
   <header>
     <span>班级成员</span>
-    <i class="member-close"></i>
+    <i id="nameListWindowCloseButton" class="member-close"></i>
   </header>
   <section class="content">
     <div class="name-list">
       <input id="searchName" type="text" placeholder="搜索人名...">
       <div id="nameListLeft"class="name-list-left">
-        <span style="display:none;"></span>
+        <span id="nameListModel" style="display:none;"></span>
       </div>
+      <!-- <div id="nameListLeftSearch"class="name-list-left">
+        <span style="display:none;"></span>
+      </div> -->
     </div>
     <div class="button-list">
       <button id="addName2List" class="add-button">添加</button>
       <button id="delName2List" class="del-button">删除</button>
     </div>
     <div id="nameListRight"class="name-list name-list-right">
-      <span style="display:none;"></span>
+      <span id="nameListRightModel" style="display:none;"></span>
     </div>
   </section>
   <div class="footer">
     <button id="confirm">确定</button>
   </div>
-
 </div>
 <!-- 提交成功 -->
 <div class="success" style="display:none;">
@@ -98,7 +98,7 @@
               课程列表
             </span>
         </div>
-        <ul>
+        <ul id="courseList">
           <li>
             <s class="s-icon"></s>
             <a href="javascript:">全部课程</a>
@@ -107,8 +107,7 @@
             <s class="s-icon"></s>
             <a href="javascript:">课程一：静夜思</a>
           </li>
-          <li
-          >
+          <li>
             <s class="s-icon"></s>
             <a href="javascript:">课程二：红军长征</a>
           </li>
@@ -152,9 +151,6 @@
           <li id="classProject" class="my-project">
             <a href="javascript:">班级作品</a>
           </li>
-          <!-- <li class="class-project">
-            <a href="javascript:">班级作品</a>
-          </li> -->
           <li id="createProject" class="new-project">
             <s class="new-ico"></s>
             <a href="javascript:">新建作品</a>
@@ -165,148 +161,24 @@
           </li>
         </ul>
       </div>
-
       <section class="search-bar">
         <ul class="clearfix">
-          <li class="search">
+          <li id="searchButton" class="search">
             <span>搜索</span>
           </li>
           <li class="search-box">
             <i></i>
-            <input type="text" placeholder="搜索资源...">
+            <input id="searhInputBox" type="text" placeholder="搜索资源...">
           </li>
         </ul>
       </section>
-      <article class="right-content">
-        <div class="item" style="display:none;">
+      <article id="content" class="right-content">
+        <div id="itemModel" class="item" style="display:none;">
           <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
             <i class="shader-ico"></i>
             <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
+            <span  class="date dateTime">2016/08/04 10:55</span>
           </div>
-
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <!-- unique block to describe the box -->
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-
-        </div>
-        <div class="item">
-          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-        </div>
-        <div class="item item2">
-          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-        </div>
-        <div class="item">
-          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-        </div>
-        <div class="item item4">
-          <div class="shader shader-right" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-        </div>
-        <div class="item">
-          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-        </div>
-        <div class="item item6">
-          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-        </div>
-        <div class="item">
-          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-        </div>
-        <div class="item item8">
-          <div class="shader shader-right" class="shader-right" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-          <div class="choose-tap">
-            <span class="edit">编辑</span>
-            <span class="play">播放</span>
-            <span class="del">删除</span>
-            <span class="tap-des">郑和下西洋</span>
-          </div>
-        </div>
-      </article>
-      <article class="class-project" style="display:none">
-        <div class="item" style="display:none;">
-          <div class="shader shader-left" data-msg="李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明">
-            <i class="shader-ico"></i>
-            <span class="name-des">李冉、涂佳佳、李婷、张婷、张三、李四、 王小明、张三丰黎明</span>
-            <span class="date">2016/08/04 10:55</span>
-          </div>
-
           <div class="choose-tap">
             <span class="edit">编辑</span>
             <span class="play">播放</span>
@@ -318,13 +190,11 @@
         </div>
       </article>
 
-      <!-- resource is null -->
-      <!-- <section class="null-resource"></section> -->
       <footer>
-        <div class="footer-cat" style="cursor:auto;">
+        <div class="footer-cat">
           <span><</span>
         </div>
-        <div class="footer-cat selected">
+        <div class="footer-cat">
           <span>1</span>
         </div>
         <div class="footer-cat">
@@ -336,7 +206,7 @@
         <div class="footer-cat">
           <span>4</span>
         </div>
-        <div class="footer-cat selected">
+        <div class="footer-cat">
           <span>5</span>
         </div>
         <div class="footer-cat a">
@@ -352,15 +222,11 @@
     </div>
   </div>
 </body>
-
-<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+<!-- <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script> -->
 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="js/upload.min.js"></script>
-<script type="text/javascript" src="index.js"></script>
-<script>
-  var draggie = new Draggabilly('.new',{containment:true});
-  var draggie2 = new Draggabilly('.member',{containment:true});
-
-</script>
-
+<script type="text/javascript" src="js/data.js"></script>
+<script type="text/javascript" src="js/createItem.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/selected.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
 </html>
